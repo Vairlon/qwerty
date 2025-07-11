@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -9,6 +10,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/send-to-telegram', async (req, res) => {
   const { name, lastName, phone, email, info, answers } = req.body;
