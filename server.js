@@ -12,12 +12,17 @@ const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 app.use(bodyParser.json());
 app.use(cors());
 
+
 app.post('/send-to-telegram', async (req, res) => {
   const { name, lastName, phone, email, info, answers } = req.body;
   if (!name || !lastName || !phone || !email) {
     return res.json({ success: false, error: { description: 'Не все поля заполнены' } });
   }
-
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
   const message = `
 <b>Новая заявка с сайта</b>
 Имя: ${name}
