@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
@@ -18,7 +19,7 @@ app.post('/send-to-telegram', async (req, res) => {
   const message = `
 <b>Новая заявка с сайта</b>
 Имя: ${name}
-Фамилия: ${lastName}
+Отчество: ${lastName}
 Телефон: ${phone}
 Email: ${email}
 Доп. информация: ${info || '-'}
